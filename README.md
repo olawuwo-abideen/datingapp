@@ -1,4 +1,4 @@
-Backend to a Dating app 
+Backend to a Dating App 
 
 Installation
 
@@ -23,13 +23,21 @@ Open a terminal and enter the following command to install all the  modules need
 Create a `.env` file with
 
 `DB_HOST=localhost`
+
 `DB_PORT=3306`
+
 `DB_USERNAME=root`
+
 `DB_PASSWORD=password`
+
 `DB_NAME=datingapp`
+
 `PORT=3000`
+
 `JWT_SECRET=secret`
+
 `JWT_EXPIRATION_TIME=216000`
+
 `JWT_RESET_PASSWORD_EXPIRATION_TIME=30000`
 
 
@@ -100,8 +108,8 @@ The following API endpoints are available:
 **Reporting and Blocking Endpoints**
 
 - **POST /report/user/{userId}**: Report a user for inappropriate behavior (requires report details).
-- **POST /block/{userId}**: Block a specific user, preventing them from seeing your profile or messaging you.
-- **DELETE /block/{userId}** : Unblock a previously blocked user.
+- **POST /report/block/{userId}**: Block a specific user, preventing them from seeing your profile or messaging you.
+- **DELETE /report/block/{userId}** : Unblock a previously blocked user.
 
 **Payment and Subscription Endpoints**
 
