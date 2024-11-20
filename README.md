@@ -64,13 +64,16 @@ The following API endpoints are available:
 
 **User Endpoint**
 
-- **GET /profile/**:Retrieve the currently authenticated user’s profile.
+- **GET /user/**:Retrieve the currently authenticated user’s profile.
+- **POST user/change-password**: User change password.
+- **PUT /user/**: update the user’s profile.
+- **PUT /user/profile-image** : Upload or update the user’s profile photo.
+- **PUT /user/profile/visibility/**: Set profile visibility to public or private.
+
+
 - **GET /profile/{userId}**:Retrieve another user’s profile by their user ID.
-- **PUT /profile/**: update the user’s profile .
 - **DELETE /profile/**: Delete the user profile.
-- **PUT /profile/visibility**: Set profile visibility to public or private..
 - **POST /profile/preferences**: Update the user’s preferences (age, distance, gender, interests).
-- **PATCH /profile/photo** : Upload or update the user’s profile photo.
 - **DELETE /profile/photo/{photoId}**: Delete a specific profile photo.
 
 **Matchmaking Endpoints**

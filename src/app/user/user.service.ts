@@ -12,6 +12,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { ChangePasswordDto } from './dto/change-password.dto';
 import {  UpdateProfileDto } from './dto/update-profile.dto';
 import { CloudinaryService } from '../../shared-module/cloudinary/services/cloudinary.service';
+import { UpdateVisibilityDto } from './dto/update-profile-visibility.dto';
 
 @Injectable()
 export class UserService {
@@ -86,7 +87,6 @@ export class UserService {
           lastname: data.lastname,
           age: data.age,
           phone: data.phone,
-          profilevisible: data.profilevisible,
           location: data.location,
           preferences: data.preferences,
         };
@@ -101,20 +101,35 @@ export class UserService {
       
       
       public async updateProfileImage(
-        headerImage: Express.Multer.File,
+        profileImage: Express.Multer.File,
         user: User,
       ): Promise<User> {
-        // Upload header image to Cloudinary
-        if (headerImage) {
-          const uploadHeaderImage = await this.cloudinaryService.uploadFile(headerImage);
-          user.profileimage = uploadHeaderImage.secure_url;
+        if (profileImage) {
+          const uploadProfileImage = await this.cloudinaryService.uploadFile(profileImage);
+          user.profileimage = uploadProfileImage.secure_url;
         }
-      
-        // Update user record in the database
         await this.userRepository.save(user);
       
         return user;
       }
 
+
+      public async profileVisibility(
+        data: UpdateVisibilityDto,
+        user: User,
+      ): Promise<User> {
+        // Prepare data to update
+        const dataToUpdate: Partial<User> = {
+          profilevisible: data.profilevisible,
+        };
+      
+        Object.assign(user, dataToUpdate);
+        // Update user record in the database
+        await this.userRepository.save(user);
+      
+        return user;
+      }
+      
+      
 
 }

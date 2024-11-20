@@ -51,6 +51,14 @@ export class UserController {
     ) {
       return await this.userService.updateProfileImage(profileImage, user);
     }
+
+    @Put('profile/visibility')
+    public async profileVisibility(
+      @Body() payload: UpdateProfileDto,
+      @CurrentUser() user: User,
+    ) {
+      return await this.userService.updateProfile(payload, user);
+    }
   
 }
 

@@ -5,12 +5,12 @@ import {
     NotFoundException,
   } from '@nestjs/common';
   import { UserService } from '../user/user.service';
-  import { EntityManager, Repository } from 'typeorm';
+  import { Repository } from 'typeorm';
   import { SignupDto } from '../auth/dto/sigup.dto';
   import { LoginDto } from '../auth/dto/login.dto';
   import { User, UserRole } from '../../shared-module/entities/user.entity';
   import { JwtService } from '@nestjs/jwt';
-  import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
+  import { InjectRepository } from '@nestjs/typeorm';
   import { ConfigService } from '@nestjs/config';
   import { ResetPasswordDto } from '../auth/dto/reset-password.dto';
   import * as bcrypt from 'bcryptjs';
@@ -20,15 +20,12 @@ import {
   @Injectable()
   export class AuthService {
     constructor(
-      
       private readonly userService: UserService,
       private readonly jwtService: JwtService,
       private readonly configService: ConfigService,
-    private readonly verificationService: VerificationService,
-      @InjectEntityManager() private readonly entityManager: EntityManager,
+      private readonly verificationService: VerificationService,
       @InjectRepository(User)
       private readonly userRepository: Repository<User>,
-
       private readonly emailService: EmailService,
     ) {}
   
@@ -146,11 +143,6 @@ import {
         const decodedToken = this.jwtService.verify(token, {
           secret: this.configService.get('JWT_SECRET'),
         });
-  
-        // You can choose to store the token's expiration time or just rely on the client to stop using it
-        // In this case, no additional action is needed because the token is stateless
-  
-        // Logging or any other cleanup (optional)
         console.log(`User with ID ${decodedToken.sub} has logged out`);
       } catch (error) {
         throw new BadRequestException('Invalid token or already expired.');
@@ -164,7 +156,7 @@ import {
         });
         return true;
       } catch (error) {
-        return false; // Token is invalid or expired
+        return false;
       }
     }
   }
