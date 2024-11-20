@@ -30,6 +30,14 @@ export class AuthController {
   async resetPassword(@Body() payload: ResetPasswordDto): Promise<void> {
     await this.authService.resetPassword(payload);
   }
+
+
+
+  @Post('logout')
+async logout(@Body('token') token: string): Promise<void> {
+  await this.authService.logout(token);
+}
+
 }
 
 

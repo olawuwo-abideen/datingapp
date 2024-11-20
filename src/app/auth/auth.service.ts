@@ -139,5 +139,39 @@ import {
         { password, resetToken: null },
       );
     }
+
+
+    async logout(token: string): Promise<void> {
+      try {
+        const decodedToken = this.jwtService.verify(token, {
+          secret: this.configService.get('JWT_SECRET'),
+        });
+  
+        // You can choose to store the token's expiration time or just rely on the client to stop using it
+        // In this case, no additional action is needed because the token is stateless
+  
+        // Logging or any other cleanup (optional)
+        console.log(`User with ID ${decodedToken.sub} has logged out`);
+      } catch (error) {
+        throw new BadRequestException('Invalid token or already expired.');
+      }
+    }
+  
+    async isTokenValid(token: string): Promise<boolean> {
+      try {
+        this.jwtService.verify(token, {
+          secret: this.configService.get('JWT_SECRET'),
+        });
+        return true;
+      } catch (error) {
+        return false; // Token is invalid or expired
+      }
+    }
   }
+
+
+
+
+
+  
   
