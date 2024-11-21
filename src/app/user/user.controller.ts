@@ -7,6 +7,7 @@ import {
     Put,
     UseInterceptors,
     UploadedFile,
+    Delete,
   } from '@nestjs/common';
   import RequestWithUser from '../../shared-module/dtos/request-with-user.dto';
   import { UserService } from './user.service';
@@ -52,7 +53,7 @@ export class UserController {
       return await this.userService.updateProfileImage(profileImage, user);
     }
 
-    @Put('profile/visibility')
+    @Put('visibility')
     public async profileVisibility(
       @Body() payload: UpdateProfileDto,
       @CurrentUser() user: User,
@@ -60,7 +61,10 @@ export class UserController {
       return await this.userService.updateProfile(payload, user);
     }
   
+
+    @Delete('')
+    public async deleteUser(@CurrentUser() user: User) {
+      return await this.userService.deleteUser({ id: user.id });
 }
 
-
-
+}

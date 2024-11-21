@@ -31,7 +31,7 @@ export class UserService {
         return await this.userRepository.save(user);
       }
     
-      // update verification code
+      
       public async update(
         where: FindOptionsWhere<User>,
         data: QueryDeepPartialEntity<User>,
@@ -131,5 +131,7 @@ export class UserService {
       }
       
       
-
+public async deleteUser(where: FindOptionsWhere<User>): Promise<UpdateResult> {
+        return await this.userRepository.softDelete(where);
+      }    
 }

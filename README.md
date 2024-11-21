@@ -69,12 +69,18 @@ The following API endpoints are available:
 - **PUT /user/**: update the user’s profile.
 - **PUT /user/profile-image** : Upload or update the user’s profile photo.
 - **PUT /user/profile/visibility/**: Set profile visibility to public or private.
-
-
-- **GET /profile/{userId}**:Retrieve another user’s profile by their user ID.
 - **DELETE /profile/**: Delete the user profile.
-- **POST /profile/preferences**: Update the user’s preferences (age, distance, gender, interests).
-- **DELETE /profile/photo/{photoId}**: Delete a specific profile photo.
+
+
+
+**Payment and Subscription Endpoints**
+
+- **GET /plan**: Get available plan.
+- **GET /plan/current**: Get user current plan.
+
+
+- **GET /payment/history**: View the user’s payment history for subscriptions and purchases.
+
 
 **Matchmaking Endpoints**
 
@@ -114,12 +120,7 @@ The following API endpoints are available:
 - **POST /report/block/{userId}**: Block a specific user, preventing them from seeing your profile or messaging you.
 - **DELETE /report/block/{userId}** : Unblock a previously blocked user.
 
-**Payment and Subscription Endpoints**
 
-- **POST /payment/subscribe**: Subscribe to a premium plan (monthly or yearly).
-- **POST /payment/cancel-subscription**: Cancel the current premium subscription.
-- **POST /payment/boost**: Purchase a one-time profile boost.
-- **GET /payment/history**: View the user’s payment history for subscriptions and purchases.
 
 **Notification Endpoints**
 
