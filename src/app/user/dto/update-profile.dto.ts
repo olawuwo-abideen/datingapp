@@ -8,15 +8,11 @@ export class UpdateProfileDto {
   @IsNotEmpty()
   lastname: string;
 
-
   @IsNotEmpty()
   age: number;
 
   @IsNotEmpty()
   phone: string;
-
-  @IsNotEmpty()
-  profilevisible: boolean;
 
   @IsOptional()
   @ValidateNested()

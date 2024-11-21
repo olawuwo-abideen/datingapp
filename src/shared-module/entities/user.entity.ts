@@ -16,6 +16,11 @@ export enum UserRole {
   USER = 'user',
 }
 
+export enum ProfileVisibility {
+  PRIVATE = 'private',
+  PUBLIC = 'public',
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -39,8 +44,14 @@ export class User {
   @Column({ nullable: true })
   profileimage?: string;
 
-  @Column({ nullable: true, name: 'profilevisible' })
-  profilevisible?: boolean;
+  @Column({
+    type: 'enum',
+    enum: ProfileVisibility,
+    default: ProfileVisibility.PRIVATE,
+    nullable: false,
+    name: 'profilevisibility'
+  })
+  profilevisibility: ProfileVisibility;
 
   @Column({  nullable: true, name: 'location', type: 'json' })
   location: {

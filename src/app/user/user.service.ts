@@ -25,7 +25,7 @@ export class UserService {
         return await this.userRepository.findOne({ where });
       }
     
-      // create verification code
+
       public async create(data: DeepPartial<User>): Promise<User> {
         const user: User = await this.userRepository.create(data);
         return await this.userRepository.save(user);
@@ -120,7 +120,7 @@ export class UserService {
       ): Promise<User> {
         // Prepare data to update
         const dataToUpdate: Partial<User> = {
-          profilevisible: data.profilevisible,
+          profilevisibility: data.profilevisibility,
         };
       
         Object.assign(user, dataToUpdate);
