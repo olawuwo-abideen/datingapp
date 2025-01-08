@@ -71,7 +71,7 @@ export class User {
   // @Exclude()
   password: string;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER, })
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.ADMIN, })
   role: UserRole;
 
   @Column({ type: 'varchar', name: 'reset_token', nullable: true })
