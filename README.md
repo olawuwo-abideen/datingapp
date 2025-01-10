@@ -69,15 +69,7 @@ The following API endpoints are available:
 - **PUT /user/**: update the user’s profile.
 - **PUT /user/profile-image** : Upload or update the user’s profile photo.
 - **PUT /user/profile/visibility/**: Set profile visibility to public or private.
-
-
-
-**Payment and Subscription Endpoints**
-
-- **GET /plan**: Get available plan.
-- **GET /plan/current**: Get user current plan.
-- **GET /payment/history**: View the user’s payment history for subscriptions and purchases.
-
+- **PUT /user/plan/**: Update user plan.
 
 **Matchmaking Endpoints**
 
@@ -104,7 +96,8 @@ The following API endpoints are available:
 - **PATCH /settings/privacy**: Update privacy settings (control who can see the user’s profile, hide online status).
 
 **Admin and Moderation Endpoints**
-- **POST /plan**: Create available plan.
+- **GET /users**: Get all users.
+- **DELETE /users**: Delete a user.
 - **GET /admin/reports**: Get a list of reported users or profiles for review.
 - **POST /admin/block/{userId}**: Block a user for violating community guidelines.
 - **POST /unblock/{userId}**: Unblock a previously blocked user.

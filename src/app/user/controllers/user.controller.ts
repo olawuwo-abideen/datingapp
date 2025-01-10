@@ -6,15 +6,14 @@ import {
   Post,
   Put,
   UseInterceptors,
-  UploadedFile,
-  Delete,
+  UploadedFile
 } from '@nestjs/common';
 import RequestWithUser from '../../../shared-module/dto/request-with-user.dto';
 import { UserService } from '../services/user.service';
 import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
 import { User } from '../../../shared-module/entities/user.entity';
 import { ChangePasswordDto } from '../dto/change-password.dto';
-import {UpdateProfileDto, UpdateProfileVisibilityDto } from '../dto/update-profile.dto';
+import {UpdateProfileDto, UpdateProfileVisibilityDto, UpdatePlan } from '../dto/update-profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
@@ -61,11 +60,16 @@ export class UserController {
     return await this.userService.profileVisibility(payload, user);
   }
 
+  @Put('plan')
+  public async updatePlan(
+    @Body() payload: UpdatePlan,
+    @CurrentUser() user: User,
+  ) {
+    return await this.userService.updatePlan(payload, user);
+  }
 
-  @Delete('')
-  public async deleteUser(@CurrentUser() user: User) {
-    return await this.userService.deleteUser({ id: user.id });
-}
+
+
 
 
 }

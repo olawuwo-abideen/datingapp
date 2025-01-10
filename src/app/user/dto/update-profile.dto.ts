@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { ProfileVisibility } from 'src/shared-module/entities/user.entity';
+import { UserPlan } from 'src/shared-module/entities/user.entity';
 
 class AgeRangeDto {
   @IsNumber()
@@ -58,4 +59,9 @@ export class UpdateProfileDto {
 export class UpdateProfileVisibilityDto {
   @IsNotEmpty()
   profilevisibility: ProfileVisibility;
+}
+
+export class UpdatePlan {
+  @IsNotEmpty()
+  userplan: UserPlan;
 }

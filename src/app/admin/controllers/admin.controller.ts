@@ -1,8 +1,9 @@
-import { Controller, Delete, Get, Param } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { User } from 'src/shared-module/entities/user.entity';
 import { CurrentUser } from 'src/shared-module/decorators/current-user.decorator'; 
 import { AdminService } from '../services/admin.service';
 import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
+
 
 @Controller('admin')
 export class AdminController {
@@ -20,8 +21,6 @@ export class AdminController {
     )  {    
       return await this.adminService.deleteUser({ id });
 }
-
-
 
 
 

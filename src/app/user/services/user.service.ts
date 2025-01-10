@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcryptjs from 'bcryptjs';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { ChangePasswordDto } from '../dto/change-password.dto';
-import { UpdateProfileVisibilityDto, UpdateProfileDto } from '../dto/update-profile.dto';
+import { UpdateProfileVisibilityDto, UpdateProfileDto, UpdatePlan } from '../dto/update-profile.dto';
 import { CloudinaryService } from '../../../shared-module/cloudinary/services/cloudinary.service';
 
 @Injectable()
@@ -154,9 +154,19 @@ export class UserService {
   }
   
   
-public async deleteUser(where: FindOptionsWhere<User>): Promise<UpdateResult> {
-    return await this.userRepository.softDelete(where);
-  }    
-
+  public async updatePlan(
+    data: UpdatePlan,
+    user: User,
+  ): Promise<User> {
+    // Prepare data to update
+    const dataToUpdate: Partial<User> = {
+      plan: data.userplan,
+    };
+    Object.assign(user, dataToUpdate);
+    // Update user record in the database
+    await this.userRepository.save(user);
+  
+    return user;
+  }
 
 }

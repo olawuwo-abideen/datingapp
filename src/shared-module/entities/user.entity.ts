@@ -21,6 +21,12 @@ export enum ProfileVisibility {
   PUBLIC = 'public',
 }
 
+export enum UserPlan {
+  FREE = 'free',
+  PREMIUM = 'premium',
+  GOLD = 'gold',
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -52,6 +58,15 @@ export class User {
     name: 'profilevisibility'
   })
   profilevisibility: ProfileVisibility;
+
+  @Column({
+    type: 'enum',
+    enum: UserPlan,
+    default: UserPlan.FREE,
+    nullable: false,
+    name: 'userplan'
+  })
+  plan: UserPlan;
 
   @Column({  nullable: true, name: 'location', type: 'json' })
   location: {
