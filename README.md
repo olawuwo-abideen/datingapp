@@ -87,14 +87,6 @@ The following API endpoints are available:
 - **PATCH /messages/read/{matchId}**: Mark all messages in a conversation as read.
 - **DELETE /messages/{messageId}**: Delete a specific message from a conversation.
 
-**User Preferences and Settings Endpoints**
-
-- **PATCH /preferences**: Update filters (age range, location, gender, interests).
-- **POST /preferences/boost**: Activate a profile boost for increased visibility (premium feature).
-- **GET /preferences**: Retrieve the current user’s match preferences and filters.
-- **PATCH /settings/notifications**: Update notification preferences (match, message, profile boosts).
-- **PATCH /settings/privacy**: Update privacy settings (control who can see the user’s profile, hide online status).
-
 **Admin and Moderation Endpoints**
 - **GET /users**: Get all users.
 - **DELETE /users**: Delete a user.
@@ -108,7 +100,7 @@ The following API endpoints are available:
 
 - **POST /report/user/{userId}**: Report a user for inappropriate behavior (requires report details).
 - **POST /report/block/{userId}**: Block a specific user, preventing them from seeing your profile or messaging you.
-- **DELETE /report/block/{userId}** : Unblock a previously blocked user.
+- **PUT /report/block/{userId}** : Unblock a previously blocked user.
 
 
 

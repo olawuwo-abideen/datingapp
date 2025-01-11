@@ -12,7 +12,7 @@ import { Reflector } from '@nestjs/core';
 import { UserService } from '../../user/services/user.service';
 import { User } from '../../../shared-module/entities/user.entity';
 import { IS_PUBLIC_KEY } from '../../../shared-module/decorators/public.decorator';
-import { isString } from 'class-validator';
+
 
 @Injectable()
 export class AuthGuard implements CanActivate {

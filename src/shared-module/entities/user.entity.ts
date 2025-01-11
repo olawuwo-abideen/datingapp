@@ -10,6 +10,7 @@ import {
   Index,
   OneToOne,
 } from 'typeorm';
+import { Report } from './report.entity';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -41,7 +42,7 @@ export class User {
   @Column({ name: 'age', nullable: true })
   age?: number;
 
-  @Column({ unique: true, length: 50 })
+  @Column({unique: true, length: 50, nullable: false})
   email: string;
 
   @Column({ unique: true, length: 20 })
@@ -83,16 +84,19 @@ export class User {
 
 
   @Column()
-  // @Exclude()
+  @Exclude()
   password: string;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.ADMIN, })
+  @Column({ type: 'enum', enum: UserRole })
   role: UserRole;
 
   @Column({ type: 'varchar', name: 'reset_token', nullable: true })
   @Exclude()
   resetToken: string | null;
 
+  @OneToMany(() => Report, (report) => report.user)
+  reports?: Report[];
+   
   @CreateDateColumn({
     name: 'created_at',
   })

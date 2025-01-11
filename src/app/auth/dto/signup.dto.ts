@@ -29,7 +29,9 @@ export class SignupDto {
   @IsEmail()
   email: string;
 
-  @IsOptional()
+  
+
+  @IsNotEmpty()
   @IsEnum(UserRole)
   role: UserRole;
 

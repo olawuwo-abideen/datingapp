@@ -6,6 +6,8 @@ import { TypeOrmConfigService } from '../shared-module/services/typeorm/typeorm-
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
+import { ReportModule } from './report/report.module';
+
 
 
 
@@ -26,7 +28,9 @@ import { AdminModule } from './admin/admin.module';
     }),
     AuthModule,
     UserModule,
-    AdminModule
+    AdminModule,
+    ReportModule,
+   
 
   ],
   controllers: [],
