@@ -1,9 +1,5 @@
 import { IsNotEmpty, MinLength, MaxLength, Matches } from 'class-validator';
-<<<<<<< HEAD
-import { PasswordMatch } from '../../../shared-module/validations/password-match.validation';
-=======
 import { PasswordMatch } from '../../../shared-module/validation/password-validation.dto';
->>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 
 export class ChangePasswordDto {
   @IsNotEmpty({ message: 'Current password is required' })

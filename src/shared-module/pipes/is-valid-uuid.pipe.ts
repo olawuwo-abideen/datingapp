@@ -1,12 +1,8 @@
 import {
   ArgumentMetadata,
   BadRequestException,
-<<<<<<< HEAD
-  Injectable
-=======
   Injectable,
   PipeTransform,
->>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 } from '@nestjs/common';
 import { ParseUUIDPipe } from '@nestjs/common';
 

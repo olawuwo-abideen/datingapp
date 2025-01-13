@@ -54,20 +54,19 @@ export class UserService {
     data: ChangePasswordDto,
     user: User,
   ): Promise<null> {
- 
-  
-    // Refetch the user to ensure the password is included
+
     if (!user.password) {
-      user = await this.userRepository.findOne({
+      const foundUser = await this.userRepository.findOne({
         where: { id: user.id },
       });
-  
-      if (!user || !user.password) {
+    
+      if (!foundUser || !foundUser.password) {
         throw new BadRequestException('No password found for the user.');
       }
+    
+      user = foundUser; 
     }
   
-    
     const isCurrentPasswordValid = await bcryptjs.compare(
       data.currentPassword,
       user.password,
@@ -85,8 +84,6 @@ export class UserService {
     }
   
     const saltRounds = 10;
-  
-    
     const hashedNewPassword = await bcryptjs.hash(data.password, saltRounds);
   
     await this.update(
@@ -96,6 +93,7 @@ export class UserService {
   
     return null;
   }
+  
   
   public async updateProfile(
     data: UpdateProfileDto,

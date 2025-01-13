@@ -1,10 +1,6 @@
 import {
   CanActivate,
   ExecutionContext,
-<<<<<<< HEAD
-  ForbiddenException,
-=======
->>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -12,18 +8,10 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { IncomingMessage } from 'http';
 import { Reflector } from '@nestjs/core';
-<<<<<<< HEAD
 import { UserService } from '../../user/services/user.service';
 import { User } from '../../../shared-module/entities/user.entity';
 import { IS_PUBLIC_KEY } from '../../../shared-module/decorators/public.decorator';
 
-
-=======
-import { UserService } from '../../user/user.service';
-import { User } from '../../../shared-module/entities/user.entity';
-import { IS_PUBLIC_KEY } from '../../../shared-module/decorators/public.decorator';
-
->>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
@@ -32,6 +20,7 @@ export class AuthGuard implements CanActivate {
     private readonly configService: ConfigService,
     private readonly userService: UserService,
   ) {}
+
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // Get isPublic decorator
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
@@ -74,9 +63,11 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
   }
+
   protected getRequest<T>(context: ExecutionContext): T {
     return context.switchToHttp().getRequest();
   }
+
   protected getToken(
     request: IncomingMessage & { user?: User | undefined },
   ): string {
@@ -96,9 +87,4 @@ export class AuthGuard implements CanActivate {
     const [_, token] = authorization.split(' ');
     return token;
   }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 }

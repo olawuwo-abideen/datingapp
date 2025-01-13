@@ -15,15 +15,6 @@ export class ReportService {
 
 
 
-
-
-
-
-
-
-
-
-
     public async getUserReports(user: User): Promise<Report[]> {
         return await this.reportRepository.find({
             where: { userId: user.id }, 

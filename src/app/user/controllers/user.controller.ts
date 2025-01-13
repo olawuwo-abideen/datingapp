@@ -8,7 +8,7 @@ import {
   UseInterceptors,
   UploadedFile
 } from '@nestjs/common';
-import RequestWithUser from '../../../shared-module/dto/request-with-user.dto';
+import RequestWithUser from '../../../shared-module/dtos/request-with-user.dto';
 import { UserService } from '../services/user.service';
 import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
 import { User } from '../../../shared-module/entities/user.entity';

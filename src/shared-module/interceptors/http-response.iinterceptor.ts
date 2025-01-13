@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponseDto } from '../dto/api-response.dto';
+import { ApiResponseDto } from '../dtos/api-response.dto';
 import { Response } from 'express';
 
 @Injectable()

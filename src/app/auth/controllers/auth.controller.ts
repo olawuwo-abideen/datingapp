@@ -4,6 +4,7 @@ import { SignupDto } from '../dto/signup.dto';
 import { LoginDto } from '../dto/login.dto';
 import { Public } from '../../../shared-module/decorators/public.decorator';
 import { ForgotPasswordDto, ResetPasswordDto } from '../dto/reset-password.dto';
+import { Request } from 'express';
 
 @Controller('auth')
 @Public()
