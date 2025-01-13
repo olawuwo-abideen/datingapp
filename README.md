@@ -69,7 +69,22 @@ The following API endpoints are available:
 - **PUT /user/**: update the user’s profile.
 - **PUT /user/profile-image** : Upload or update the user’s profile photo.
 - **PUT /user/profile/visibility/**: Set profile visibility to public or private.
+<<<<<<< HEAD
 - **PUT /user/plan/**: Update user plan.
+=======
+- **DELETE /profile/**: Delete the user profile.
+
+
+
+**Payment and Subscription Endpoints**
+
+- **GET /plan**: Get available plan.
+- **GET /plan/current**: Get user current plan.
+
+
+- **GET /payment/history**: View the user’s payment history for subscriptions and purchases.
+
+>>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 
 **Matchmaking Endpoints**
 
@@ -87,9 +102,22 @@ The following API endpoints are available:
 - **PATCH /messages/read/{matchId}**: Mark all messages in a conversation as read.
 - **DELETE /messages/{messageId}**: Delete a specific message from a conversation.
 
+<<<<<<< HEAD
 **Admin and Moderation Endpoints**
 - **GET /users**: Get all users.
 - **DELETE /users**: Delete a user.
+=======
+**User Preferences and Settings Endpoints**
+
+- **PATCH /preferences**: Update filters (age range, location, gender, interests).
+- **POST /preferences/boost**: Activate a profile boost for increased visibility (premium feature).
+- **GET /preferences**: Retrieve the current user’s match preferences and filters.
+- **PATCH /settings/notifications**: Update notification preferences (match, message, profile boosts).
+- **PATCH /settings/privacy**: Update privacy settings (control who can see the user’s profile, hide online status).
+
+**Admin and Moderation Endpoints**
+
+>>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 - **GET /admin/reports**: Get a list of reported users or profiles for review.
 - **POST /admin/block/{userId}**: Block a user for violating community guidelines.
 - **POST /unblock/{userId}**: Unblock a previously blocked user.
@@ -100,7 +128,11 @@ The following API endpoints are available:
 
 - **POST /report/user/{userId}**: Report a user for inappropriate behavior (requires report details).
 - **POST /report/block/{userId}**: Block a specific user, preventing them from seeing your profile or messaging you.
+<<<<<<< HEAD
 - **PUT /report/block/{userId}** : Unblock a previously blocked user.
+=======
+- **DELETE /report/block/{userId}** : Unblock a previously blocked user.
+>>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 
 
 

@@ -1,7 +1,10 @@
 import {
   CanActivate,
   ExecutionContext,
+<<<<<<< HEAD
   ForbiddenException,
+=======
+>>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -9,11 +12,18 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { IncomingMessage } from 'http';
 import { Reflector } from '@nestjs/core';
+<<<<<<< HEAD
 import { UserService } from '../../user/services/user.service';
 import { User } from '../../../shared-module/entities/user.entity';
 import { IS_PUBLIC_KEY } from '../../../shared-module/decorators/public.decorator';
 
 
+=======
+import { UserService } from '../../user/user.service';
+import { User } from '../../../shared-module/entities/user.entity';
+import { IS_PUBLIC_KEY } from '../../../shared-module/decorators/public.decorator';
+
+>>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
@@ -86,6 +96,9 @@ export class AuthGuard implements CanActivate {
     const [_, token] = authorization.split(' ');
     return token;
   }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 21981fb5e1637d1fdf4cb3b2647d25c71f258d22
 }
