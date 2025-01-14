@@ -58,7 +58,7 @@ The following API endpoints are available:
 - **DELETE /admin/user/:id**: Delete a user.
 - **GET /admin/reports**: Get a list of reported users or profiles for review.
 - **POST /admin/suspend/{userId}**: Temporarily suspend a user account.
-- **GET /admin/users**: Fetch a list of all users (with filters for status like active, suspended, etc.).
+- **GET /admin/users**: Fetch a list of all users (with filters for status like active, suspended and blocked).
 
 **Authentication Endpoint**
 
@@ -82,7 +82,8 @@ The following API endpoints are available:
 - **POST /report/user/{userId}**: Report a user for inappropriate behavior (requires report details).
 - **GET /report/user/**: Get all user report.
 - **POST /report/block/{userId}**: Block a specific user, preventing them from seeing your profile or messaging you.
-- **DELETE /report/block/{userId}** : Unblock a previously blocked user.
+- **PUT /report/block/{userId}** : Unblock a previously blocked user.
+- **GET /report/block/users** : Get a list of blocked user.
 
 **Matchmaking Endpoints**
 

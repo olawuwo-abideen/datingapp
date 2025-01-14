@@ -1,7 +1,7 @@
-import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { AdminService } from '../services/admin.service';
 import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
-
+import { UpdateUserStatusDto } from '../dto/updateuserstatus.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -25,6 +25,14 @@ public async getAllReports() {
 return await this.adminService.getAllReports();
 }
 
+
+@Patch('user/status/:id')
+  public async updateUserStatus(
+    @Param('id', IsValidUUIDPipe) id: string,
+    @Body() updateUserStatusDto: UpdateUserStatusDto,
+  ) {
+    return await this.adminService.updateUserStatus(id, updateUserStatusDto);
+  }
 
 
 }

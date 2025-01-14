@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/shared-module/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Report } from 'src/shared-module/entities/report.entity';
+import { UpdateUserStatusDto } from '../dto/updateuserstatus.dto';
 
 @Injectable()
 export class AdminService {
@@ -52,7 +53,25 @@ data: transformedReports,
 
 
 
+public async updateUserStatus(
+  userId: string,
+  updateUserStatusDto: UpdateUserStatusDto,
+): Promise<{ message: string }> {
+  const { userstatus } = updateUserStatusDto;
 
+  // Fetch the user to ensure they exist
+  const user = await this.userRepository.findOne({ where: { id: userId } });
+
+  if (!user) {
+    throw new NotFoundException(`User with ID ${userId} not found.`);
+  }
+
+  // Update the user's status
+  user.userstatus = userstatus;
+  await this.userRepository.save(user);
+
+  return { message: `User status updated to '${userstatus}' for user with ID ${userId}.` };
+}
 
 
 

@@ -1,49 +1,56 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    CreateDateColumn,
-    UpdateDateColumn,
-    JoinColumn,
-    DeleteDateColumn,
-    ManyToOne,
-    Index,
-    OneToOne,
-  } from 'typeorm';
-  import { User } from './user.entity';
+Entity,
+PrimaryGeneratedColumn,
+Column,
+CreateDateColumn,
+UpdateDateColumn,
+JoinColumn,
+DeleteDateColumn,
+ManyToOne,
+Index,
+OneToOne,
+} from 'typeorm';
+import { User } from './user.entity';
 
- 
-  @Entity('reports')
+export enum BlockAction {
+BLOCK = 'block',
+UNBLOCK = 'unblock',
+}
+
+@Entity('reports')
 export class Report {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+@PrimaryGeneratedColumn('uuid')
+id: string;
 
-  @Column({ type: 'uuid', length: 36, name: 'user_id', nullable: false })
-  userId: string;
+@Column({ type: 'uuid', length: 36, name: 'user_id', nullable: false })
+userId: string;
 
-  @ManyToOne(() => User, (user) => user.reports)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+@Column({ name: 'blocked_user_id', nullable: true })
+blockedUserId: string
 
-  @Column({ name: 'report_id', type: 'uuid', nullable: false, length: 36 })
-  reportId: string;
+@ManyToOne(() => User, (user) => user.reports)
+@JoinColumn({ name: 'user_id' })
+user: User;
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'report_id' })
-  reportedUser: User;
+@Column({ name: 'report_id', type: 'uuid', nullable: true, length: 36 })
+reportId: string;
 
-  @Column()
-  reason: string;
+@ManyToOne(() => User)
+@JoinColumn({ name: 'report_id' })
+reportedUser: User;
 
-  @Column()
-  details: string;
+@Column({nullable: true})
+reason: string;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+@Column({nullable: true})
+details: string;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+@CreateDateColumn({ name: 'created_at' })
+createdAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
-  deletedAt: Date;
+@UpdateDateColumn({ name: 'updated_at' })
+updatedAt: Date;
+
+@DeleteDateColumn({ name: 'deleted_at', nullable: true })
+deletedAt: Date;
 }
