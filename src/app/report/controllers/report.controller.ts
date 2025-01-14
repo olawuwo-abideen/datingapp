@@ -31,7 +31,7 @@ return await this.reportService.getUserReports(user.id);
 @Post('block/:id')
 public async blockUser(
   @Param('id', IsValidUUIDPipe) userId: string,
-  @CurrentUser() user: User, // Get the current user object
+  @CurrentUser() user: User,
 ) {
   return await this.reportService.blockUser(user, userId);
 }
@@ -39,15 +39,15 @@ public async blockUser(
 @Post('unblock/:id')
 public async unblockUser(
   @Param('id', IsValidUUIDPipe) userId: string,
-  @CurrentUser() user: User, // Get the current user object
+  @CurrentUser() user: User, 
 ) {
   return await this.reportService.unblockUser(user, userId);
 }
 
-// @Get('blocked-users')
-// public async getBlockedUsers(@CurrentUser() user: User) {
-//   return await this.reportService.getBlockedUsers(user);
-// }
+@Get('blocked-users')
+public async getBlockedUsers(@CurrentUser() user: User) {
+  return await this.reportService.getBlockedUsers(user);
+}
 
 
 

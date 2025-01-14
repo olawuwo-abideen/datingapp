@@ -7,15 +7,9 @@ UpdateDateColumn,
 JoinColumn,
 DeleteDateColumn,
 ManyToOne,
-Index,
-OneToOne,
 } from 'typeorm';
 import { User } from './user.entity';
 
-export enum BlockAction {
-BLOCK = 'block',
-UNBLOCK = 'unblock',
-}
 
 @Entity('reports')
 export class Report {
@@ -27,6 +21,8 @@ userId: string;
 
 @Column({ name: 'blocked_user_id', nullable: true })
 blockedUserId: string
+
+
 
 @ManyToOne(() => User, (user) => user.reports)
 @JoinColumn({ name: 'user_id' })

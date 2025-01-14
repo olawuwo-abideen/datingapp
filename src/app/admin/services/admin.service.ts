@@ -19,7 +19,7 @@ return await this.userRepository.find();
 public async deleteUser(params: { id: string }): Promise<{ message: string }> {
 const { id } = params;
 
-// Fetch the user to ensure they exist
+
 const user = await this.userRepository.findOne({ where: { id } });
 
 if (!user) {
@@ -32,11 +32,9 @@ return { message: `User with ID ${id} has been successfully deleted.` };
 
 
 public async getAllReports(): Promise<any> {
-// Retrieve all reports from the database
 const reports = await this.reportRepository.find({
 });
 
-// Transform each report to the desired format
 const transformedReports = reports.map((report) => ({
 reportId: report.id,
 reason: report.reason,
@@ -45,7 +43,7 @@ reportedUserId: report.reportId,
 userCreatingTheReport: report.userId,
 }));
 
-// Return the transformed reports
+
 return {
 data: transformedReports,
 };
@@ -59,14 +57,12 @@ public async updateUserStatus(
 ): Promise<{ message: string }> {
   const { userstatus } = updateUserStatusDto;
 
-  // Fetch the user to ensure they exist
+
   const user = await this.userRepository.findOne({ where: { id: userId } });
 
   if (!user) {
     throw new NotFoundException(`User with ID ${userId} not found.`);
   }
-
-  // Update the user's status
   user.userstatus = userstatus;
   await this.userRepository.save(user);
 

@@ -31,7 +31,6 @@ export class AuthService {
 
 
   public async signup(data: SignupDto) {
-    // Check if email already exists
     const existingEmailUser = await this.userRepository.findOne({
       where: { email: data.email },
     });
@@ -39,8 +38,6 @@ export class AuthService {
     if (existingEmailUser) {
       throw new ConflictException('Email is already in use');
     }
-  
-    // Check if phone number already exists
     const existingPhoneUser = await this.userRepository.findOne({
       where: { phone: data.phone },
     });
@@ -49,10 +46,7 @@ export class AuthService {
       throw new ConflictException('Phone number is already in use');
     }
     const saltRounds = 10;
-    // Hash the password
     const password: string = await bcryptjs.hash(data.password, saltRounds);
-  
-    // Create the user instance
     let user: User = this.userRepository.create({
       firstname: data.firstname,
       lastname: data.lastname,
@@ -61,34 +55,26 @@ export class AuthService {
       role:data.role, 
       password: password,
     });
-  
-    // Save user in the database within a transaction
     user = await this.entityManager.transaction(async (manager) => {
       return await manager.save(User, user);
     });
-  
     return user;
   }
 
   public async login({ email, password }: LoginDto) {
     const user: User | null = await this.userService.findOne({ email });
-  
-    // Correct usage of bcryptjs.compare()
     if (!user || !(await bcryptjs.compare(password, user.password))) {
       throw new UnauthorizedException('Email or password is incorrect');
     }
-  
     return {
       token: this.createAccessToken(user),
       user,
     };
   }
-  
   public createAccessToken(user: User): string {
     return this.jwtService.sign({ sub: user.id });
   }
   
-
   async forgotPassword(email: string): Promise<void> {
     const user: User | null = await this.userService.findOne({ email });
 
@@ -157,23 +143,20 @@ export class AuthService {
     if (!isValid) {
       throw new BadRequestException('Token is already invalidated');
     }
-    // Add the token to the invalidated tokens store
     this.invalidatedTokens.add(token);
   }
 
-  // Method to validate if the token is still valid
   public async isTokenValid(token: string): Promise<boolean> {
-    // Check if the token is in the invalidated tokens list
+    
     if (this.invalidatedTokens.has(token)) {
       return false;
     }
 
     try {
-      // Optionally, you could check for JWT expiration here
       const decoded = this.jwtService.verify(token);
       return !!decoded;
     } catch (error) {
-      return false; // Token is invalid or expired
+      return false;
     }
   }
 

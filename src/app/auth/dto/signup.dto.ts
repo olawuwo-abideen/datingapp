@@ -3,13 +3,10 @@ import {
   IsEnum,
   IsMobilePhone,
   IsNotEmpty,
-  IsOptional,
   IsString,
-  IsUUID,
   Matches,
   MaxLength,
   MinLength,
-  ValidateIf,
 } from 'class-validator';
 import { PasswordMatch } from 'src/shared-module/validations/password-validation.dto';
 import { UserRole } from '../../../shared-module/entities/user.entity';

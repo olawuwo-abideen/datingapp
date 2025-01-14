@@ -6,9 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  DeleteDateColumn,
-  Index,
-  OneToOne,
+  DeleteDateColumn
 } from 'typeorm';
 import { Report } from './report.entity';
 
