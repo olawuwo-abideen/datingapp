@@ -5,8 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { PasswordMatch } from '../../../shared-module/validations/password-match.validation';
-
+import { PasswordMatch } from 'src/shared-module/validations/password-validation.dto';
 export class ForgotPasswordDto {
   @IsString()
   @IsNotEmpty()

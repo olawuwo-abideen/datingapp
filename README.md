@@ -55,6 +55,7 @@ The following API endpoints are available:
 
 **Admin and Moderation Endpoints**
 
+- **DELETE /admin/user/:id**: Delete a user.
 - **GET /admin/reports**: Get a list of reported users or profiles for review.
 - **POST /admin/suspend/{userId}**: Temporarily suspend a user account.
 - **GET /admin/users**: Fetch a list of all users (with filters for status like active, suspended, etc.).

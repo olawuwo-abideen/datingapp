@@ -1,17 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { isDevelopement } from 'src/shared-module/utils/helpers.util';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   constructor(private readonly configService: ConfigService) {}
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    let synchronize = false;
+    let synchronize = true;
 
-    // if (isDevelopement()) {
-    //   synchronize = true;
-    // }
+    if (isDevelopement()) {
+      synchronize = true;
+    }
 
     return {
       type: 'mysql',

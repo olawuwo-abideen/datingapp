@@ -3,10 +3,11 @@ import { AdminController } from './controllers/admin.controller';
 import { AdminService } from './services/admin.service';
 import { User } from 'src/shared-module/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Report } from 'src/shared-module/entities/report.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Report]),
   ],
   controllers: [AdminController],
   providers: [AdminService],

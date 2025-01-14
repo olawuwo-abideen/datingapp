@@ -28,6 +28,12 @@ export enum UserPlan {
   GOLD = 'gold',
 }
 
+export enum UserStatus {
+  ACTIVE = 'active',
+  BLOCKED = 'blocked',   
+  SUSPENDED = 'suspended' 
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -59,6 +65,16 @@ export class User {
     name: 'profilevisibility',
   })
   profilevisibility: ProfileVisibility;
+
+  @Column({
+    type: 'enum',
+    enum: UserStatus,
+    default: UserStatus.ACTIVE,
+    nullable: false,
+    name: 'userstatus',
+  })
+  userstatus: UserStatus;
+
 
   @Column({
     type: 'enum',
