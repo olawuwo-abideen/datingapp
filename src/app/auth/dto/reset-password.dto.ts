@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
@@ -6,13 +7,16 @@ import {
   MinLength,
 } from 'class-validator';
 import { PasswordMatch } from 'src/shared-module/validations/password-validation.dto';
+
 export class ForgotPasswordDto {
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   email: string;
 }
 
 export class ResetPasswordDto {
+  @ApiProperty()
   @IsNotEmpty()
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
   @MaxLength(20, { message: 'Password must not exceed 20 characters' })
@@ -25,10 +29,12 @@ export class ResetPasswordDto {
   )
   password: string;
 
+  @ApiProperty()
   @IsNotEmpty({ message: 'Confirm password is required' })
   @PasswordMatch()
   confirmPassword: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   token: string;
