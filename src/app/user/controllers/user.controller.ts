@@ -6,7 +6,8 @@ import {
   Post,
   Put,
   UseInterceptors,
-  UploadedFile
+  UploadedFile,
+  Param
 } from '@nestjs/common';
 import RequestWithUser from '../../../shared-module/dtos/request-with-user.dto';
 import { UserService } from '../services/user.service';
@@ -15,6 +16,7 @@ import { User } from '../../../shared-module/entities/user.entity';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 import {UpdateProfileDto, UpdateProfileVisibilityDto, UpdatePlan } from '../dto/update-profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
 
 @Controller('users')
 export class UserController {
@@ -68,7 +70,12 @@ export class UserController {
     return await this.userService.updatePlan(payload, user);
   }
 
-
+  @Get(':id')
+  public async getUserProfileById(
+    @Param('id', IsValidUUIDPipe) id: string,
+  ): Promise<{ user: User }> {    
+    return await this.userService.getUserProfileById({ id });
+  }
 
 
 

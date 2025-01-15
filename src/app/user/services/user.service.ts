@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {
   DeepPartial,
   FindOptionsWhere,
@@ -24,13 +24,12 @@ export class UserService {
     return await this.userRepository.findOne({ where });
   }
 
-  // create verification code
+
   public async create(data: DeepPartial<User>): Promise<User> {
     const user: User = await this.userRepository.create(data);
     return await this.userRepository.save(user);
   }
 
-  // update verification code
   public async update(
     where: FindOptionsWhere<User>,
     data: QueryDeepPartialEntity<User>,
@@ -99,7 +98,6 @@ export class UserService {
     data: UpdateProfileDto,
     user: User,
   ): Promise<User> {
-    // Prepare data to update
     const dataToUpdate: Partial<User> = {
       firstname: data.firstname,
       lastname: data.lastname,
@@ -111,7 +109,6 @@ export class UserService {
   
     Object.assign(user, dataToUpdate);
   
-    // Update user record in the database
     await this.userRepository.save(user);
   
     return user;
@@ -123,13 +120,11 @@ export class UserService {
     profileimage: Express.Multer.File,
     user: User,
   ): Promise<User> {
-    // Upload header image to Cloudinary
     if (profileimage) {
       const uploadHeaderImage = await this.cloudinaryService.uploadFile(profileimage);
       user.profileimage = uploadHeaderImage.secure_url;
     }
-  
-    // Update user record in the database
+
     await this.userRepository.save(user);
   
     return user;
@@ -139,13 +134,10 @@ export class UserService {
     data: UpdateProfileVisibilityDto,
     user: User,
   ): Promise<User> {
-    // Prepare data to update
     const dataToUpdate: Partial<User> = {
       profilevisibility: data.profilevisibility,
     };
-  
     Object.assign(user, dataToUpdate);
-    // Update user record in the database
     await this.userRepository.save(user);
   
     return user;
@@ -156,15 +148,23 @@ export class UserService {
     data: UpdatePlan,
     user: User,
   ): Promise<User> {
-    // Prepare data to update
     const dataToUpdate: Partial<User> = {
       plan: data.userplan,
     };
     Object.assign(user, dataToUpdate);
-    // Update user record in the database
     await this.userRepository.save(user);
-  
     return user;
+  }
+
+
+
+  public async getUserProfileById(params: { id: string }): Promise<{ user: User }> {
+    const { id } = params;
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found.`);
+    }
+    return { user };
   }
 
 }

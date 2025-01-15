@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from 'src/shared-module/entities/user.entity';
 import { Report } from 'src/shared-module/entities/report.entity';
 import { ReportDto } from '../dto/report.dto';
@@ -16,8 +16,6 @@ export class ReportService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-
-  
   public async reportUser(
     user: User,
     reportedUserId: string,
@@ -53,8 +51,6 @@ export class ReportService {
     };
   }
   
-
-
   public async getUserReports(userId: string): Promise<any> {
     const userReports = await this.reportRepository.find({
       where: { userId },
@@ -70,10 +66,6 @@ export class ReportService {
       data: transformedReports,
     };
   }
-  
-
-
-
 
   public async blockUser(
     user: User, 
@@ -125,7 +117,6 @@ export class ReportService {
     return { message: `User with ID ${targetUserId} has been unblocked.` };
   }
 
-
   async getBlockedUsers(user: User): Promise<any> {
     const reports = await this.reportRepository.find({
       where: {
@@ -148,14 +139,3 @@ export class ReportService {
   }
 
 }
-
-
-
-
-
-
-  
-  
-
-
-

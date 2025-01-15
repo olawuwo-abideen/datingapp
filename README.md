@@ -76,6 +76,7 @@ The following API endpoints are available:
 - **PUT /user/profile-image** : Upload or update the user’s profile photo.
 - **PUT /user/profile/visibility/**: Set profile visibility to public or private.
 - **PUT /user/plan**: Update user plan.
+- **GET /user/id**: Get user profile.
 
 **Reporting and Blocking Endpoints**
 
@@ -87,11 +88,11 @@ The following API endpoints are available:
 
 **Matchmaking Endpoints**
 
-- **GET /match/discover**:Fetch a list of profiles for the user to swipe through based on filters.
-- **POST /match/swipe**: Swipe right (like) or left (pass) on a profile (requires profile ID and swipe direction).
-- **GET /match/mutual**: Get a list of users where a mutual match has occurred (both users swiped right).
-- **GET /match/check/{userId}**: Check if there’s already a mutual match with a specific user.
-- **DELETE /match/{userId}**: Unmatch or remove a connection with a specific user.
+- **GET /match/discover**:Fetch a list of profiles for the user for match.
+- **GET /match/send/:id**:Send match request to a user.
+- **Put /match/status/:id**:Update match request(Accept/Rejects).
+
+
 
 **Messaging Endpoints**
 
@@ -100,14 +101,6 @@ The following API endpoints are available:
 - **GET /messages/unread**: Get the count of unread messages for the current user.
 - **PATCH /messages/read/{matchId}**: Mark all messages in a conversation as read.
 - **DELETE /messages/{messageId}**: Delete a specific message from a conversation.
-
-**User Preferences and Settings Endpoints**
-
-- **PATCH /preferences**: Update filters (age range, location, gender, interests).
-- **POST /preferences/boost**: Activate a profile boost for increased visibility (premium feature).
-- **GET /preferences**: Retrieve the current user’s match preferences and filters.
-- **PATCH /settings/notifications**: Update notification preferences (match, message, profile boosts).
-- **PATCH /settings/privacy**: Update privacy settings (control who can see the user’s profile, hide online status).
 
 
 **Notification Endpoints**

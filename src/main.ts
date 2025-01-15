@@ -10,18 +10,13 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   
   const app = await NestFactory.create(AppModule);
+
   app.use(helmet()); 
-
   app.enableCors();
-
   app.use(compression());
-
   app.useGlobalInterceptors(new HttpResponseInterceptor());
-
-  // validation pipe
   app.useGlobalPipes(new ValidationPipe());
-
-  // exception filters
+  
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new HttpExceptionFilter(httpAdapter));
 

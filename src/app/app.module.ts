@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 import { ReportModule } from './report/report.module';
+import { MatchModule } from './match/match.module';
 
 
 @Module({
@@ -27,7 +28,7 @@ import { ReportModule } from './report/report.module';
     UserModule,
     AdminModule,
     ReportModule,
-
+    MatchModule
   ],
   controllers: [],
   providers: [],
