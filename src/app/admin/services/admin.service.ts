@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/shared-module/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Report } from 'src/shared-module/entities/report.entity';
 import { UpdateUserStatusDto } from '../dto/updateuserstatus.dto';
+import { PaginationDto } from 'src/shared-module/dtos/pagination.dto';
 
 @Injectable()
 export class AdminService {
@@ -12,8 +13,29 @@ constructor(
 @InjectRepository(Report) private readonly reportRepository: Repository<Report>
 ){}
 
-public async getAllUsers(): Promise<User[]> {
-return await this.userRepository.find();
+
+public async getAllUsers(paginationData: PaginationDto): Promise<{
+  data: User[];
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+}> {
+  const { page = 1, pageSize = 10 } = paginationData;
+
+  const currentPage = Math.max(1, page); 
+  const limit = Math.min(Math.max(1, pageSize), 10); 
+
+  const [users, total] = await this.userRepository.findAndCount({
+    skip: (currentPage - 1) * limit,
+    take: limit,
+  });
+
+  return {
+    data: users,
+    currentPage,
+    totalPages: Math.ceil(total / limit),
+    totalItems: total,
+  }
 }
 
 public async deleteUser(params: { id: string }): Promise<{ message: string }> {

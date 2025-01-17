@@ -79,25 +79,19 @@ if (!receiver) {
 throw new NotFoundException('User not found.');
 
 }
-
-// Check if sender and receiver are the same (optional check)
 if (sender.id === receiver.id) {
 throw new Error('Cannot send match request to yourself');
 }
 
-// Create a new match object
 const match = new Match();
 match.sender = sender;
 match.receiver = receiver;
 match.status = MatchStatus.PENDING;
-
-// Save the match request to the database
 return this.matchRepository.save(match);
 }
 
 
 async updateMatchStatus(user: User, id: string, status: string): Promise<Match> {
-// Fetch the match request by matchId
 const match = await this.matchRepository.findOne(
 { where: { id } }
 );

@@ -103,6 +103,7 @@ export class UserService {
       lastname: data.lastname,
       age: data.age,
       phone: data.phone,
+      gender:data.gender,
       location: data.location,
       preferences: data.preferences,
     };

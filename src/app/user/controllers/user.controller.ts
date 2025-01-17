@@ -7,7 +7,8 @@ import {
   Put,
   UseInterceptors,
   UploadedFile,
-  Param
+  Param,
+  HttpStatus
 } from '@nestjs/common';
 import RequestWithUser from '../../../shared-module/dtos/request-with-user.dto';
 import { UserService } from '../services/user.service';
@@ -17,17 +18,32 @@ import { ChangePasswordDto } from '../dto/change-password.dto';
 import {UpdateProfileDto, UpdateProfileVisibilityDto, UpdatePlan } from '../dto/update-profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('')
+    @ApiOperation({ summary: 'Get current user profile' })
+    @ApiResponse({ 
+      status: HttpStatus.OK,
+      description:
+        'User profile retrieve successfully.',
+    })
   async getProfile(@Request() req: RequestWithUser) {
     return await this.userService.profile(req.user);
   }
 
   @Post('change-password')
+    @ApiOperation({ summary: 'User change password' })
+    @ApiBody({ type: ChangePasswordDto, description: 'Change user password' })
+    @ApiResponse({
+      status: HttpStatus.OK,
+      description:
+        'User Password updated successfully',
+    })
   public async changePassword(
     @Body() payload: ChangePasswordDto,
     @CurrentUser() user: User,
@@ -36,6 +52,13 @@ export class UserController {
   }
 
   @Put('')
+    @ApiOperation({ summary: 'Update user profile' })
+    @ApiBody({ type: UpdateProfileDto, description: 'Update user profile' })
+    @ApiResponse({
+      status: HttpStatus.OK,
+      description:
+        'User profile updated successfully',
+    })
   public async updateProfile(
     @Body() payload: UpdateProfileDto,
     @CurrentUser() user: User,
@@ -46,6 +69,13 @@ export class UserController {
 
 
   @Put('profile-image')
+    @ApiOperation({ summary: 'User Update profile image ' })
+    @ApiBody({description: 'User update profile image' })
+    @ApiResponse({
+      status: HttpStatus.OK,
+      description:
+        'Image update successfully.',
+    })
   @UseInterceptors(FileInterceptor('profileimage'))
   public async updateProfileImage(
     @UploadedFile() profileimage: Express.Multer.File,
@@ -55,6 +85,13 @@ export class UserController {
   }
 
   @Put('profile/visibility')
+    @ApiOperation({ summary: 'Update profile visibility' })
+    @ApiBody({ type: UpdateProfileVisibilityDto, description: 'Update profile visibility' })
+    @ApiResponse({
+      status: HttpStatus.CREATED,
+      description:
+        'User profile updated successfully.',
+    })
   public async profileVisibility(
     @Body() payload: UpdateProfileVisibilityDto,
     @CurrentUser() user: User,
@@ -63,6 +100,13 @@ export class UserController {
   }
 
   @Put('plan')
+    @ApiOperation({ summary: 'User update plan' })
+    @ApiBody({ type: UpdatePlan, description: 'Update user plan' })
+    @ApiResponse({
+      status: HttpStatus.OK,
+      description:
+        'Update user plan',
+    })
   public async updatePlan(
     @Body() payload: UpdatePlan,
     @CurrentUser() user: User,
@@ -71,6 +115,12 @@ export class UserController {
   }
 
   @Get(':id')
+    @ApiOperation({ summary: 'Get user profile by id' })
+    @ApiResponse({
+      status: HttpStatus.OK,
+      description:
+        'User profile retrieve successfully.',
+    })
   public async getUserProfileById(
     @Param('id', IsValidUUIDPipe) id: string,
   ): Promise<{ user: User }> {    

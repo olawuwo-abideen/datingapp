@@ -2,6 +2,7 @@ import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import helmet from 'helmet';
 import * as compression from 'compression';
+import * as cookieParser from 'cookie-parser';
 import { HttpExceptionFilter } from './shared-module/exceptions/http.exception'
 import { HttpResponseInterceptor } from  './shared-module/interceptors/http-response.iinterceptor'
 import {ValidationPipe} from './shared-module/pipes/validation.pipe'
@@ -14,6 +15,7 @@ async function bootstrap() {
   app.use(helmet()); 
   app.enableCors();
   app.use(compression());
+  app.use(cookieParser());
   app.useGlobalInterceptors(new HttpResponseInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   
@@ -23,9 +25,9 @@ async function bootstrap() {
   const port = parseInt(String(process.env.PORT)) || 3000;
 
   const config = new DocumentBuilder()
-  .setTitle('Median')
-  .setDescription('The Median API description')
-  .setVersion('0.1')
+  .setTitle('Datingapp')
+  .setDescription('A dating app backend')
+  .setVersion('1.0')
   .build();
   
   const document = SwaggerModule.createDocument(app, config);

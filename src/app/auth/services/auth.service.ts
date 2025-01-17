@@ -4,7 +4,9 @@ import {
   UnauthorizedException,
   NotFoundException,
   ConflictException,
+  HttpStatus,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { UserService } from '../../user/services/user.service';
 import { EntityManager, Repository } from 'typeorm';
 import { SignupDto } from '../dto/signup.dto';
@@ -19,6 +21,7 @@ import * as bcryptjs from "bcryptjs"
 
 @Injectable()
 export class AuthService {
+  logger: any;
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
@@ -137,27 +140,23 @@ export class AuthService {
     );
   }
 
-  private invalidatedTokens: Set<string> = new Set();
-  public async logout(token: string): Promise<void> {
-    const isValid = await this.isTokenValid(token);
-    if (!isValid) {
-      throw new BadRequestException('Token is already invalidated');
-    }
-    this.invalidatedTokens.add(token);
-  }
 
-  public async isTokenValid(token: string): Promise<boolean> {
-    
-    if (this.invalidatedTokens.has(token)) {
-      return false;
+  async logout(user: Partial<User>, res: Response) {
+    if (!user || !user.id) {
+      throw new UnauthorizedException('User identification is missing');
     }
-
+  
     try {
-      const decoded = this.jwtService.verify(token);
-      return !!decoded;
+      res.clearCookie('jwt');
+      this.logger.log(`User with ID ${user.id} has logged out successfully.`);
+      return res.status(HttpStatus.OK).json({ message: 'Sign-out successful' });
     } catch (error) {
-      return false;
+      this.logger.error('An error occurred during sign-out.', error);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        message: 'An error occurred during sign-out. Please try again later.',
+      });
     }
   }
-
+  
+ 
 }

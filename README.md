@@ -94,13 +94,13 @@ The following API endpoints are available:
 
 
 
-**Messaging Endpoints**
+**Chat Endpoints**
 
-- **GET /messages/{matchId}**: Retrieve the chat history between two matched users.
-- **POST /messages/{matchId}**: Send a new message to a matched user.
-- **GET /messages/unread**: Get the count of unread messages for the current user.
-- **PATCH /messages/read/{matchId}**: Mark all messages in a conversation as read.
-- **DELETE /messages/{messageId}**: Delete a specific message from a conversation.
+- **GET /chat/{matchId}**: Retrieve the chat history between two matched users.
+- **POST /chat/{matchId}**: Send a new message to a matched user.
+- **GET /chat/unread**: Get the count of unread messages for the current user.
+- **PATCH /chat/read/{matchId}**: Mark all messages in a conversation as read.
+- **DELETE /chat/{messageId}**: Delete a specific message from a conversation.
 
 
 **Notification Endpoints**

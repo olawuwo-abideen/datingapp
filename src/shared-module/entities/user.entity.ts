@@ -6,9 +6,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  DeleteDateColumn
+  DeleteDateColumn,
+  ManyToMany
 } from 'typeorm';
 import { Report } from './report.entity';
+
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -28,8 +30,12 @@ export enum UserPlan {
 
 export enum UserStatus {
   ACTIVE = 'active',
-  BLOCKED = 'blocked',   
-  SUSPENDED = 'suspended' 
+  BLOCKED = 'blocked'
+}
+
+export enum Gender {
+  MALE = 'male',
+  FEMALE = 'female'
 }
 
 @Entity('users')
@@ -83,6 +89,14 @@ export class User {
   })
   plan: UserPlan;
 
+  @Column({
+    type: 'enum',
+    enum: Gender,
+    nullable: false,
+    name: 'gender',
+  })
+  gender: Gender;
+
   @Column({ nullable: true, name: 'location', type: 'json' })
   location: {
     latitude: number;
@@ -109,7 +123,8 @@ export class User {
 
   @OneToMany(() => Report, (report) => report.user)
   reports?: Report[];
-
+  
+  
   @CreateDateColumn({
     name: 'created_at',
   })

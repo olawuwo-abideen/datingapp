@@ -12,12 +12,10 @@ export class Match {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // Sender of the match request
   @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'sender_id' })
   sender: User;
 
-  // Receiver of the match request
   @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'receiver_id' })
   receiver: User;
@@ -30,7 +28,7 @@ export class Match {
   })
   status: MatchStatus;
 
-  // Timestamps
+
   @CreateDateColumn()
   createdAt: Date;
 
