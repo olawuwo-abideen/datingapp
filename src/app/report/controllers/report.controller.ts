@@ -4,8 +4,9 @@ import { User } from 'src/shared-module/entities/user.entity';
 import { ReportService } from '../services/report.service';
 import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
 import { ReportDto } from '../dto/report.dto';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @ApiTags('report')
 @Controller('report')
 export class ReportController {
@@ -15,7 +16,7 @@ private readonly reportService:ReportService
 ){}
 
 @Post('user/:id')
-  @ApiOperation({ summary: 'User Sign-Up' })
+  @ApiOperation({ summary: 'Report a user' })
   @ApiBody({ type: ReportDto, description: 'Report a user' })
   @ApiResponse({
     status: HttpStatus.CREATED,

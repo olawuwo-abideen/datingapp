@@ -48,7 +48,7 @@ export class ResetPasswordDto {
 
   @ApiProperty({
     required: true,
-    description: 'The user token',
+    description: 'The user reset password token',
     example: 'tywokqixdxapmquhqrdeqokwugwrdw9wq--=-458hdsgvsfcq5e581f2rd2528y_',
   })
   @IsString()

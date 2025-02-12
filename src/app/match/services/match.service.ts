@@ -14,7 +14,7 @@ private readonly matchRepository: Repository<Match>
 async discoverMatches(user: User) {
 if (!user.preferences) {
 return {
-message: 'No Match Found!',
+message: 'No Match Found, Kindly edit your profile preference',
 }
 }
 

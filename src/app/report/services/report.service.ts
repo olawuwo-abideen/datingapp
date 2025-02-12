@@ -27,7 +27,7 @@ export class ReportService {
     });
   
     if (!reportedUser) {
-      throw new NotFoundException('The user being reported does not exist');
+      throw new NotFoundException('User not exist');
     }
     const reportData = {
       userId: user.id,

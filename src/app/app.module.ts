@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 import { ReportModule } from './report/report.module';
 import { MatchModule } from './match/match.module';
+import { ChatModule } from './chat/chat.module';
 
 
 
@@ -29,7 +30,8 @@ import { MatchModule } from './match/match.module';
     UserModule,
     AdminModule,
     ReportModule,
-    MatchModule
+    MatchModule,
+    ChatModule
   ],
   controllers: [],
   providers: [],

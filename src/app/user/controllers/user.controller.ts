@@ -18,8 +18,9 @@ import { ChangePasswordDto } from '../dto/change-password.dto';
 import {UpdateProfileDto, UpdateProfileVisibilityDto, UpdatePlan } from '../dto/update-profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @ApiTags('user')
 @Controller('users')
 export class UserController {

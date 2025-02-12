@@ -11,7 +11,7 @@ import {
 import { PasswordMatch } from 'src/shared-module/validations/password-validation.dto';
 import { UserRole } from '../../../shared-module/entities/user.entity';
 import { ApiProperty, ApiQuery } from '@nestjs/swagger';
-import { Query } from '@nestjs/common';
+
 
 export class SignupDto {
 

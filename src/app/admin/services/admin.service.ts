@@ -14,7 +14,7 @@ constructor(
 ){}
 
 
-public async getAllUsers(paginationData: PaginationDto): Promise<{
+public async getAllUsers(paginationData: PaginationDto): Promise<{message:string;
   data: User[];
   currentPage: number;
   totalPages: number;
@@ -31,6 +31,7 @@ public async getAllUsers(paginationData: PaginationDto): Promise<{
   });
 
   return {
+    message: "Users data retrieved sucessfully",
     data: users,
     currentPage,
     totalPages: Math.ceil(total / limit),

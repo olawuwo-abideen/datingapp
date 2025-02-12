@@ -10,6 +10,10 @@ import {
   ManyToMany
 } from 'typeorm';
 import { Report } from './report.entity';
+import { ConnectedUser } from 'src/app/chat/entities/connected-user.entity';
+import { Message } from 'src/app/chat/entities/message.entity';
+import { Room } from 'src/app/chat/entities/room.entity';
+
 
 
 export enum UserRole {
@@ -124,6 +128,14 @@ export class User {
   @OneToMany(() => Report, (report) => report.user)
   reports?: Report[];
   
+  @ManyToMany(() => Room, (room) => room.participants)
+  rooms: Room[];
+
+  @OneToMany(() => ConnectedUser, (connectedUser) => connectedUser.user)
+  connectedUsers: ConnectedUser[];
+
+  @OneToMany(() => Message, (message) => message.creator)
+  messages: Message[];
   
   @CreateDateColumn({
     name: 'created_at',

@@ -6,7 +6,7 @@ import {
   ConflictException,
   HttpStatus,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
+import {  Response } from 'express';
 import { UserService } from '../../user/services/user.service';
 import { EntityManager, Repository } from 'typeorm';
 import { SignupDto } from '../dto/signup.dto';
@@ -61,7 +61,10 @@ export class AuthService {
     user = await this.entityManager.transaction(async (manager) => {
       return await manager.save(User, user);
     });
-    return user;
+    return {
+      message: 'User signup successfully',
+      user
+    }
   }
 
   public async login({ email, password }: LoginDto) {
@@ -70,6 +73,7 @@ export class AuthService {
       throw new UnauthorizedException('Email or password is incorrect');
     }
     return {
+      message: "User login sucessfully",
       token: this.createAccessToken(user),
       user,
     };
