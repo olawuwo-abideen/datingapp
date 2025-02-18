@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User, UserStatus } from 'src/shared-module/entities/user.entity';
+import { User, UserStatus } from '../../../shared-module/entities/user.entity';
 import { Not, Repository } from 'typeorm';
-import { Match, MatchStatus } from 'src/shared-module/entities/match.entity';
+import { Match, MatchStatus } from '../../../shared-module/entities/match.entity';
 
 @Injectable()
 export class MatchService {

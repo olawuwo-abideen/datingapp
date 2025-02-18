@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/shared-module/entities/user.entity';
+import { User } from '../../../shared-module/entities/user.entity';
 import { Repository } from 'typeorm';
-import { Report } from 'src/shared-module/entities/report.entity';
+import { Report } from '../../../shared-module/entities/report.entity';
 import { UpdateUserStatusDto } from '../dto/updateuserstatus.dto';
-import { PaginationDto } from 'src/shared-module/dtos/pagination.dto';
+import { PaginationDto } from '../../../shared-module/dtos/pagination.dto';
 
 @Injectable()
 export class AdminService {
@@ -55,22 +55,22 @@ return { message: `User with ID ${id} has been successfully deleted.` };
 
 
 public async getAllReports(): Promise<any> {
-const reports = await this.reportRepository.find({
-});
+  const reports = await this.reportRepository.find();
 
-const transformedReports = reports.map((report) => ({
-reportId: report.id,
-reason: report.reason,
-details: report.details,
-reportedUserId: report.reportId,
-userCreatingTheReport: report.userId,
-}));
+  const transformedReports = reports.map((report) => ({
+    reportId: report.id,
+    reason: report.reason,
+    details: report.details,
+    reportedUserId: report.reportId,
+    userCreatingTheReport: report.userId,
+  }));
 
-
-return {
-data: transformedReports,
-};
+  return {
+    message: 'Reports retrieved successfully',
+    data: transformedReports,
+  };
 }
+
 
 
 
@@ -89,7 +89,7 @@ public async updateUserStatus(
   user.userstatus = userstatus;
   await this.userRepository.save(user);
 
-  return { message: `User status updated to '${userstatus}' for user with ID ${userId}.` };
+  return { message: `User status updated to '${userstatus}' for user with ID ${userId}.`};
 }
 
 

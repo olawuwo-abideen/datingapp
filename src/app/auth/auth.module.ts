@@ -10,11 +10,11 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { User } from '../../shared-module/entities/user.entity';
 import { CloudinaryModule } from '../../shared-module/cloudinary/cloudinary.module';
-import { EmailModule } from 'src/shared-module/modules/email/email.module';
+import { EmailModule } from '../../shared-module/modules/email/email.module';
 
 @Module({
   imports: [
-    UserModule,
+    UserModule,  
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({

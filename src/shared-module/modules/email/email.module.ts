@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { EmailService } from './email.service';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from 'src/app/user/user.module';
+import { UserModule } from '../../../app/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/shared-module/entities/user.entity';
+import { User } from '../../../shared-module/entities/user.entity';
+import { EmailService } from './email.service';
 
 @Module({
   imports: [
@@ -18,11 +18,11 @@ import { User } from 'src/shared-module/entities/user.entity';
       useFactory: async (config: ConfigService) => ({
         transport: {
           host: config.get('MAIL_HOST'),
-          secure: false,
           auth: {
             user: config.get('MAIL_USERNAME'),
             pass: config.get('MAIL_PASSWORD'),
           },
+          
         },
       }),
       inject: [ConfigService],

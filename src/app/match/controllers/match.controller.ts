@@ -1,8 +1,8 @@
 import { Controller, Get, HttpStatus, Param, Post, Put } from '@nestjs/common';
-import { CurrentUser } from 'src/shared-module/decorators/current-user.decorator';
+import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
 import { MatchService } from '../services/match.service';
-import { User } from 'src/shared-module/entities/user.entity';
-import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
+import { User } from '../../../shared-module/entities/user.entity';
+import { IsValidUUIDPipe } from '../../../shared-module/pipes/is-valid-uuid.pipe';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('match')

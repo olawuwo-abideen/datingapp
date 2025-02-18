@@ -6,8 +6,8 @@ import { Public } from '../../../shared-module/decorators/public.decorator';
 import { ForgotPasswordDto, ResetPasswordDto } from '../dto/reset-password.dto';
 import {  Response } from 'express';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CurrentUser } from 'src/shared-module/decorators/current-user.decorator';
-import { User } from 'src/shared-module/entities/user.entity';
+import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
+import { User } from '../../../shared-module/entities/user.entity';
 
 @ApiTags('auth')
 @Controller('auth')

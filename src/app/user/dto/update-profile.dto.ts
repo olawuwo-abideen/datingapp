@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { Gender, ProfileVisibility } from 'src/shared-module/entities/user.entity';
-import { UserPlan } from 'src/shared-module/entities/user.entity';
+import { Gender, ProfileVisibility } from '../../../shared-module/entities/user.entity';
+import { UserPlan } from '../../../shared-module/entities/user.entity';
 
 
 class AgeRangeDto {

@@ -17,7 +17,7 @@ import { User } from '../../../shared-module/entities/user.entity';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 import {UpdateProfileDto, UpdateProfileVisibilityDto, UpdatePlan } from '../dto/update-profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { IsValidUUIDPipe } from 'src/shared-module/pipes/is-valid-uuid.pipe';
+import { IsValidUUIDPipe } from '../../../shared-module/pipes/is-valid-uuid.pipe';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()

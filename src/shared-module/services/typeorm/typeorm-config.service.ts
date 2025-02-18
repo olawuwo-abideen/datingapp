@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { isDevelopement } from 'src/shared-module/utils/helpers.util';
+import { isDevelopment, isProduction } from '../../../shared-module/utils/helpers.util';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -10,8 +10,12 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): TypeOrmModuleOptions {
     let synchronize = true;
 
-    if (isDevelopement()) {
+    if (isDevelopment()) {
       synchronize = true;
+    }
+
+    if (isProduction()) {
+      synchronize = false;
     }
 
     return {

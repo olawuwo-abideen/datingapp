@@ -8,9 +8,9 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { PasswordMatch } from 'src/shared-module/validations/password-validation.dto';
+import { PasswordMatch } from '../../../shared-module/validations/password-validation.dto';
 import { UserRole } from '../../../shared-module/entities/user.entity';
-import { ApiProperty, ApiQuery } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 
 export class SignupDto {
@@ -37,18 +37,18 @@ export class SignupDto {
   @ApiProperty({
     required: true,
     description: 'The user email',
-    example: 'abideenolawuwo2000@gmail',
+    example: 'abideenolawuwo2000@gmail.com',
   })
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string;  
 
 
 
     @ApiProperty({
-      description: 'The status of the user. Allowed values: Admin,  User',
+      description: 'The status of the user. Allowed values: admin,  user',
       enum: UserRole,
-      example: 'Admin',
+      example: 'admin',
     })
   @IsNotEmpty()
   @IsEnum(UserRole)
@@ -57,7 +57,7 @@ export class SignupDto {
   @ApiProperty({
     required: true,
     description: 'The user phone number',
-    example: '+234555555555',
+    example: '08028502222',
   })
   @IsNotEmpty()
   @IsMobilePhone()
@@ -66,7 +66,7 @@ export class SignupDto {
   @ApiProperty({
     required: true,
     description: 'The user password (at least 8 characters)',
-    example: 'Password123',
+    example: 'Password123@@',
     })
   @IsNotEmpty()
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
@@ -83,7 +83,7 @@ export class SignupDto {
   @ApiProperty({
     required: true,
     description: 'The user password (at least 8 characters)',
-    example: 'Password123',
+    example: 'Password123@@',
     })
   @IsNotEmpty({ message: 'Confirm password is required' })
   @PasswordMatch()

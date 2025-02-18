@@ -2,7 +2,6 @@
     import {
     IsEmail,
     IsNotEmpty,
-    IsString,
     Matches,
     MaxLength,
     MinLength,
@@ -21,7 +20,7 @@
     @ApiProperty({
     required: true,
     description: 'The user password (at least 8 characters)',
-    example: 'Password123',
+    example: 'Password123@@',
     })
     @IsNotEmpty()
     @MinLength(6)

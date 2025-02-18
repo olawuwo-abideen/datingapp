@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AdminController } from './controllers/admin.controller';
 import { AdminService } from './services/admin.service';
-import { User } from 'src/shared-module/entities/user.entity';
+import { User } from '../../shared-module/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Report } from 'src/shared-module/entities/report.entity';
+import { Report } from '../../shared-module/entities/report.entity';
 
 @Module({
   imports: [

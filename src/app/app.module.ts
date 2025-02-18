@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from 'src/shared-module/services/typeorm/typeorm-config.service';
+import { TypeOrmConfigService } from '../shared-module/services/typeorm/typeorm-config.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 import { ReportModule } from './report/report.module';
 import { MatchModule } from './match/match.module';
-import { ChatModule } from './chat/chat.module';
+
 
 
 
@@ -31,7 +31,6 @@ import { ChatModule } from './chat/chat.module';
     AdminModule,
     ReportModule,
     MatchModule,
-    ChatModule
   ],
   controllers: [],
   providers: [],

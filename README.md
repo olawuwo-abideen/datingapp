@@ -1,5 +1,8 @@
 Backend to a Dating App 
 
+The dating app API supports admins in managing users and reports while offering users profile updates, matchmaking, messaging, reporting, and customization features. Notifications, privacy settings, and premium boosts enhance security and engagement.
+
+
 Installation
 
 - clone the repository

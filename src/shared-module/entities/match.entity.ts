@@ -11,7 +11,7 @@ export enum MatchStatus {
 export class Match {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
+ 
   @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'sender_id' })
   sender: User;

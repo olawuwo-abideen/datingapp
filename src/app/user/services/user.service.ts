@@ -43,16 +43,18 @@ export class UserService {
     return user;
   }
 
-  public async profile(user: User) {
+  public async profile(user: User): Promise<any> {
     return {
-      ...user,
+      success: true,
+      message: 'User profile retrieved successfully.',
+      data: user,
     };
   }
 
   public async changePassword(
     data: ChangePasswordDto,
     user: User,
-  ): Promise<null> {
+  ): Promise<any> {
 
     if (!user.password) {
       const foundUser = await this.userRepository.findOne({
@@ -90,14 +92,16 @@ export class UserService {
       { password: hashedNewPassword },
     );
   
-    return null;
+    return {
+      message: 'Password updated successfully.',
+    };
   }
   
   
   public async updateProfile(
     data: UpdateProfileDto,
     user: User,
-  ): Promise<User> {
+  ): Promise<any> {
     const dataToUpdate: Partial<User> = {
       firstname: data.firstname,
       lastname: data.lastname,
@@ -112,7 +116,10 @@ export class UserService {
   
     await this.userRepository.save(user);
   
-    return user;
+    return {
+      message: 'Profile updated successfully.',
+      data: user
+    };
   }
 
   
@@ -120,7 +127,7 @@ export class UserService {
   public async updateProfileImage(
     profileimage: Express.Multer.File,
     user: User,
-  ): Promise<User> {
+  ): Promise<any> {
     if (profileimage) {
       const uploadHeaderImage = await this.cloudinaryService.uploadFile(profileimage);
       user.profileimage = uploadHeaderImage.secure_url;
@@ -128,44 +135,60 @@ export class UserService {
 
     await this.userRepository.save(user);
   
-    return user;
+    return {
+      message: 'Profile image updated successfully.',
+      data: user,
+    };
   }
 
   public async profileVisibility(
     data: UpdateProfileVisibilityDto,
     user: User,
-  ): Promise<User> {
+  ): Promise<any> {
     const dataToUpdate: Partial<User> = {
       profilevisibility: data.profilevisibility,
     };
     Object.assign(user, dataToUpdate);
     await this.userRepository.save(user);
   
-    return user;
+    return {
+      message: 'Profile visibility updated successfully.',
+      data: user,
+    };
   }
   
   
   public async updatePlan(
     data: UpdatePlan,
     user: User,
-  ): Promise<User> {
+  ): Promise<any> {
     const dataToUpdate: Partial<User> = {
       plan: data.userplan,
     };
     Object.assign(user, dataToUpdate);
     await this.userRepository.save(user);
-    return user;
+    return {
+      message: 'User plan updated successfully.',
+      data: user,
+    };
   }
 
 
 
-  public async getUserProfileById(params: { id: string }): Promise<{ user: User }> {
+  public async getUserProfileById(params: { id: string }): Promise<any> {
     const { id } = params;
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found.`);
     }
-    return { user };
+    return {
+      message: 'User profile retrieved successfully.',
+      data: user,
+    };
   }
 
 }
+
+
+
+

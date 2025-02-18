@@ -6,7 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { PasswordMatch } from 'src/shared-module/validations/password-validation.dto';
+import { PasswordMatch } from '../../../shared-module/validations/password-validation.dto';
 
 export class ForgotPasswordDto {
   @ApiProperty({
