@@ -5,7 +5,7 @@ import { User } from '../../../shared-module/entities/user.entity';
 import { IsValidUUIDPipe } from '../../../shared-module/pipes/is-valid-uuid.pipe';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('match')
+@ApiTags('Match')
 @Controller('match')
 export class MatchController {
  constructor(private readonly matchService: MatchService) {}

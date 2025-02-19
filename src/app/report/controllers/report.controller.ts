@@ -7,7 +7,7 @@ import { ReportDto } from '../dto/report.dto';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()
-@ApiTags('report')
+@ApiTags('Report')
 @Controller('report')
 export class ReportController {
 

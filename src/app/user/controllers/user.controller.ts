@@ -21,7 +21,7 @@ import { IsValidUUIDPipe } from '../../../shared-module/pipes/is-valid-uuid.pipe
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()
-@ApiTags('user')
+@ApiTags('User')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}

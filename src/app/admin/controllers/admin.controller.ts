@@ -7,7 +7,7 @@ import { User } from '../../../shared-module/entities/user.entity';
 import { PaginationDto } from '../../../shared-module/dtos/pagination.dto';
 
 @ApiBearerAuth()
-@ApiTags('admin')
+@ApiTags('Admin')
 @Controller('admin')
 export class AdminController {
 

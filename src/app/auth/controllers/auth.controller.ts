@@ -9,7 +9,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
 import { User } from '../../../shared-module/entities/user.entity';
 
-@ApiTags('auth')
+@ApiTags('Auth')
 @Controller('auth')
 @Public()
 export class AuthController {
