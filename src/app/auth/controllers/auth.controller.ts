@@ -70,16 +70,6 @@ export class AuthController {
   }
 
 
-  @Post('sign-out')
-  @ApiOperation({ summary: 'User Log-Out' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description:
-      'User successfully signed out. Refresh token cleared from the cookie.',
-  })
-  async signOut(@CurrentUser() user: Partial<User>, @Res() res: Response) {
-    return await this.authService.logout(user, res);
-  }
   
 
 }

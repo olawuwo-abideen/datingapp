@@ -146,22 +146,6 @@ await this.userRepository.update(
 }
 
 
-async logout(user: Partial<User>, res: Response) {
-if (!user || !user.id) {
-throw new UnauthorizedException('User identification is missing');
-}
-
-try {
-res.clearCookie('jwt');
-this.logger.log(`User with ID ${user.id} has logged out successfully.`);
-return res.status(HttpStatus.OK).json({ message: 'Sign-out successful' });
-} catch (error) {
-this.logger.error('An error occurred during sign-out.', error);
-return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-message: 'An error occurred during sign-out. Please try again later.',
-});
-}
-}
 
 
 }
