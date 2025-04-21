@@ -139,7 +139,7 @@ export class User {
 
   @DeleteDateColumn({ name: 'deleted_at', nullable: true })
   @Exclude()
-  deletedAt: Date;
+  deletedAt: Date| null;
 
   toJSON?(): Record<string, any> {
     return instanceToPlain(this);
