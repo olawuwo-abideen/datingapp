@@ -112,7 +112,8 @@ describe('UserService', () => {
       };
 
       mockRepository.findOne.mockResolvedValue({ ...mockUser, password: 'hashedPassword' });
-      (bcryptjs.compare as jest.Mock).mockResolvedValue(true); // ✅ return true for success
+      (bcryptjs.compare as jest.Mock).mockResolvedValue(true);
+      (bcryptjs.hash as jest.Mock).mockResolvedValue('newHashedPassword');
       mockRepository.update.mockResolvedValue({ affected: 1 });
 
       const result = await service.changePassword(changePasswordDto, mockUser);
@@ -120,7 +121,7 @@ describe('UserService', () => {
       expect(result.message).toBe('Password updated successfully.');
       expect(mockRepository.update).toHaveBeenCalledWith(
         { id: mockUser.id },
-        { password: expect.any(String) },
+        { password: 'newHashedPassword' },
       );
     });
 
@@ -145,6 +146,9 @@ describe('UserService', () => {
         password: 'newPassword',
         confirmPassword: 'differentPassword',
       };
+
+      mockRepository.findOne.mockResolvedValue({ ...mockUser, password: 'hashedPassword' });
+      (bcryptjs.compare as jest.Mock).mockResolvedValue(true);
 
       await expect(service.changePassword(changePasswordDto, mockUser)).rejects.toThrow(
         new BadRequestException('New password and confirmation do not match.'),

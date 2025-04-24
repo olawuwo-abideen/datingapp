@@ -3,10 +3,8 @@ BadRequestException,
 Injectable,
 UnauthorizedException,
 NotFoundException,
-ConflictException,
-HttpStatus,
+ConflictException
 } from '@nestjs/common';
-import {  Response } from 'express';
 import { UserService } from '../../user/services/user.service';
 import { EntityManager, Repository } from 'typeorm';
 import { SignupDto } from '../dto/signup.dto';

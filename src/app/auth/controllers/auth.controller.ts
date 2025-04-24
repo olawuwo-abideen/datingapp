@@ -4,10 +4,7 @@ import { SignupDto } from '../dto/signup.dto';
 import { LoginDto } from '../dto/login.dto';
 import { Public } from '../../../shared-module/decorators/public.decorator';
 import { ForgotPasswordDto, ResetPasswordDto } from '../dto/reset-password.dto';
-import {  Response } from 'express';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
-import { User } from '../../../shared-module/entities/user.entity';
 
 @ApiTags('Auth')
 @Controller('auth')
