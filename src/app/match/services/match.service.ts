@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User, UserStatus } from '../../../shared-module/entities/user.entity';
 import { Not, Repository } from 'typeorm';
 import { Match, MatchStatus } from '../../../shared-module/entities/match.entity';
+import { from, map, Observable } from 'rxjs';
 
 @Injectable()
 export class MatchService {
@@ -116,6 +117,25 @@ return this.matchRepository.save(match);
 
 
 
-
+isMutualMatch(userId1: string, userId2: string): Observable<boolean> {
+    return from(
+      this.matchRepository.find({
+        where: [
+          {
+            sender: { id: userId1 },
+            receiver: { id: userId2 },
+            status: MatchStatus.ACCEPTED,
+          },
+          {
+            sender: { id: userId2 },
+            receiver: { id: userId1 },
+            status: MatchStatus.ACCEPTED,
+          },
+        ],
+      }),
+    ).pipe(
+      map((matches) => matches.length === 2),
+    );
+  }
 
 }

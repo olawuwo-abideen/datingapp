@@ -143,6 +143,23 @@ await this.userRepository.update(
 );
 }
 
+public async getJwtUser(token: string): Promise<User> {
+  try {
+    const decoded = this.jwtService.verify(token.replace('Bearer ', ''), {
+      secret: this.configService.get('JWT_SECRET'),
+    });
+
+    const userId = decoded.sub;
+    if (!userId) throw new UnauthorizedException('Invalid token payload');
+
+    const user = await this.userService.findOne({ id: userId });
+    if (!user) throw new UnauthorizedException('User not found');
+
+    return user;
+  } catch (error) {
+    throw new UnauthorizedException('Invalid token');
+  }
+}
 
 
 

@@ -7,8 +7,11 @@ import {
   UpdateDateColumn,
   OneToMany,
   DeleteDateColumn,
+  ManyToMany,
 } from 'typeorm';
 import { Report } from './report.entity';
+import { ConversationEntity } from './chat/conversation.entity';
+import { MessageEntity } from './chat/message.entity';
 
 
 export enum UserRole {
@@ -123,7 +126,14 @@ export class User {
   @OneToMany(() => Report, (report) => report.user)
   reports?: Report[];
   
+  @ManyToMany(
+    () => ConversationEntity,
+    (conversationEntity) => conversationEntity.users,
+  )
+  conversations: ConversationEntity[];
 
+  @OneToMany(() => MessageEntity, (messageEntity) => messageEntity.user)
+  messages: MessageEntity[];
   
   @CreateDateColumn({
     name: 'created_at',
