@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Gender, ProfileVisibility } from '../../../shared-module/entities/user.entity';
-import { UserPlan } from '../../../shared-module/entities/user.entity';
+
 
 
 class AgeRangeDto {
@@ -131,12 +131,3 @@ export class UpdateProfileVisibilityDto {
   profilevisibility: ProfileVisibility;
 }
 
-export class UpdatePlan {
-   @ApiProperty({
-     description: 'The status of the user. Allowed values: Free, Premium, Gold',
-     enum: UserPlan,
-     example: 'Gold',
-   })
-  @IsNotEmpty()
-  userplan: UserPlan;
-}

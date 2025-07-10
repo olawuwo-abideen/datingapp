@@ -9,6 +9,7 @@ import { AdminModule } from './admin/admin.module';
 import { ReportModule } from './report/report.module';
 import { MatchModule } from './match/match.module';
 import { ChatModule } from './chat/chat.module';
+import { SubscriptionModule } from './subscription/subscription.module';
 
 
 
@@ -31,7 +32,8 @@ import { ChatModule } from './chat/chat.module';
     AdminModule,
     ReportModule,
     MatchModule,
-    ChatModule
+    ChatModule,
+    SubscriptionModule
   ],
   controllers: [],
   providers: [],

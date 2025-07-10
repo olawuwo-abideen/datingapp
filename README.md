@@ -58,10 +58,11 @@ The following API endpoints are available:
 
 **Admin and Moderation Endpoints**
 
+- **DELETE /admin/users**: Get all users.
 - **DELETE /admin/user/:id**: Delete a user.
-- **GET /admin/reports**: Get a list of reported users or profiles for review.
+- **GET /admin/reports**: Get all reports.
 - **POST /admin/suspend/{userId}**: Temporarily suspend a user account.
-- **GET /admin/users**: Fetch a list of all users (with filters for status like active, suspended and blocked).
+- **GET /admin/user/status/:id**: Update user status.
 
 **Authentication Endpoint**
 
@@ -111,3 +112,12 @@ The following API endpoints are available:
 - **GET /notifications**: Retrieve a list of notifications (new matches, messages, etc.).
 - **PATCH /notifications/read/{notificationId}**: Mark a notification as read.
 - **DELETE /notifications/{notificationId}**: Delete a specific notification.
+
+
+
+**Subscription & Payments Endpoints**
+
+- **GET /subscription/plans**: Get all plans.
+- **POST /subscription/plans**: Create a plan.
+- **GET /subscription/plans/user**: Get current user plan.
+- **POST /subscription/plans/renew**: Renew user plan.

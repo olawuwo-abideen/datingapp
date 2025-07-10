@@ -15,7 +15,7 @@ import { UserService } from '../services/user.service';
 import { CurrentUser } from '../../../shared-module/decorators/current-user.decorator';
 import { User } from '../../../shared-module/entities/user.entity';
 import { ChangePasswordDto } from '../dto/change-password.dto';
-import {UpdateProfileDto, UpdateProfileVisibilityDto, UpdatePlan } from '../dto/update-profile.dto';
+import {UpdateProfileDto, UpdateProfileVisibilityDto } from '../dto/update-profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IsValidUUIDPipe } from '../../../shared-module/pipes/is-valid-uuid.pipe';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -100,20 +100,6 @@ export class UserController {
     return await this.userService.profileVisibility(payload, user);
   }
 
-  @Put('plan')
-    @ApiOperation({ summary: 'User update plan' })
-    @ApiBody({ type: UpdatePlan, description: 'Update user plan' })
-    @ApiResponse({
-      status: HttpStatus.OK,
-      description:
-        'Update user plan',
-    })
-  public async updatePlan(
-    @Body() payload: UpdatePlan,
-    @CurrentUser() user: User,
-  ) {
-    return await this.userService.updatePlan(payload, user);
-  }
 
   @Get(':id')
     @ApiOperation({ summary: 'Get user profile by id' })

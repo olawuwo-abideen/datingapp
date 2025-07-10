@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcryptjs from 'bcryptjs';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { ChangePasswordDto } from '../dto/change-password.dto';
-import { UpdateProfileVisibilityDto, UpdateProfileDto, UpdatePlan } from '../dto/update-profile.dto';
+import { UpdateProfileVisibilityDto, UpdateProfileDto } from '../dto/update-profile.dto';
 import { CloudinaryService } from '../../../shared-module/cloudinary/services/cloudinary.service';
 
 @Injectable()
@@ -157,22 +157,6 @@ export class UserService {
     };
   }
   
-  
-  public async updatePlan(
-    data: UpdatePlan,
-    user: User,
-  ): Promise<any> {
-    const dataToUpdate: Partial<User> = {
-      plan: data.userplan,
-    };
-    Object.assign(user, dataToUpdate);
-    await this.userRepository.save(user);
-    return {
-      message: 'User plan updated successfully.',
-      data: user,
-    };
-  }
-
 
 
   public async getUserProfileById(params: { id: string }): Promise<any> {

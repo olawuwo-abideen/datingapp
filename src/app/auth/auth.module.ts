@@ -11,6 +11,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { User } from '../../shared-module/entities/user.entity';
 import { CloudinaryModule } from '../../shared-module/cloudinary/cloudinary.module';
 import { EmailModule } from '../../shared-module/modules/email/email.module';
+import { Plan } from 'src/shared-module/entities/plan.entity';
+import { Subscription } from 'src/shared-module/entities/subscription.entity';
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { EmailModule } from '../../shared-module/modules/email/email.module';
         },
       }),
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Plan, Subscription]),
     CloudinaryModule,
     EmailModule,
   ],

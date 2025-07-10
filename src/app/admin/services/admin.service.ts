@@ -21,15 +21,12 @@ public async getAllUsers(paginationData: PaginationDto): Promise<{message:string
   totalItems: number;
 }> {
   const { page = 1, pageSize = 10 } = paginationData;
-
   const currentPage = Math.max(1, page); 
   const limit = Math.min(Math.max(1, pageSize), 10); 
-
   const [users, total] = await this.userRepository.findAndCount({
     skip: (currentPage - 1) * limit,
     take: limit,
   });
-
   return {
     message: "Users data retrieved sucessfully",
     data: users,
@@ -41,22 +38,17 @@ public async getAllUsers(paginationData: PaginationDto): Promise<{message:string
 
 public async deleteUser(params: { id: string }): Promise<{ message: string }> {
 const { id } = params;
-
-
 const user = await this.userRepository.findOne({ where: { id } });
-
 if (!user) {
 throw new NotFoundException(`User with ID ${id} not found.`);
 }
 await this.userRepository.delete(id);
-
 return { message: `User with ID ${id} has been successfully deleted.` };
 }
 
 
 public async getAllReports(): Promise<any> {
   const reports = await this.reportRepository.find();
-
   const transformedReports = reports.map((report) => ({
     reportId: report.id,
     reason: report.reason,
@@ -64,7 +56,6 @@ public async getAllReports(): Promise<any> {
     reportedUserId: report.reportId,
     userCreatingTheReport: report.userId,
   }));
-
   return {
     message: 'Reports retrieved successfully',
     data: transformedReports,
@@ -79,16 +70,12 @@ public async updateUserStatus(
   updateUserStatusDto: UpdateUserStatusDto,
 ): Promise<{ message: string }> {
   const { userstatus } = updateUserStatusDto;
-
-
   const user = await this.userRepository.findOne({ where: { id: userId } });
-
   if (!user) {
     throw new NotFoundException(`User with ID ${userId} not found.`);
   }
   user.userstatus = userstatus;
   await this.userRepository.save(user);
-
   return { message: `User status updated to '${userstatus}' for user with ID ${userId}.`};
 }
 
