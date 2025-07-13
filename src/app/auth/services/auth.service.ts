@@ -16,8 +16,8 @@ import { EmailService } from '../../../shared-module/modules/email/email.service
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { ConfigService } from '@nestjs/config';
 import * as bcryptjs from "bcryptjs"
-import { Plan } from 'src/shared-module/entities/plan.entity';
-import { Subscription, SubscriptionStatusEnum } from 'src/shared-module/entities/subscription.entity';
+import { Plan } from '../../../shared-module/entities/plan.entity';
+import { Subscription, SubscriptionStatusEnum } from '../../../shared-module/entities/subscription.entity';
 
 @Injectable()
 export class AuthService {

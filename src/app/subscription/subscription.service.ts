@@ -13,7 +13,7 @@ import { Payment } from '../../shared-module/entities/payment.entity';
 import { RenewSubscriptionDto } from './dto/subscription.dto';
 import { generateUniqueReference } from '../../shared-module/utils/helpers.util';
 import { isString } from 'class-validator';
-import { StripeService } from 'src/shared-module/modules/stripe/stripe.service';
+import { StripeService } from '../../shared-module/modules/stripe/stripe.service';
 
 @Injectable()
 export class SubscriptionService implements OnModuleInit {

@@ -13,13 +13,13 @@ import {
 import { Server, Socket } from 'socket.io';
 import { of, Subscription, take } from 'rxjs';
 
-import { User } from 'src/shared-module/entities/user.entity';
+import { User } from '../../../shared-module/entities/user.entity';
 import { AuthService } from '../../auth/services/auth.service';
 import { ConversationService } from '../services/conversation.service';
 import { MatchService } from '../../match/services/match.service';
 import { Message } from '../../../shared-module/entities/chat/message.interface';
 import { ActiveConversation } from '../../../shared-module/entities/chat/active-conversation.interface';
-import { AuthGuard } from 'src/app/auth/guards/auth.guard';
+
 
 @WebSocketGateway({ cors: { origin: ['http://localhost:8100'] } })
 @Injectable()

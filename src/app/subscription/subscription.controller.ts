@@ -1,10 +1,10 @@
 import { Body, Controller, Get, NotFoundException, Post } from '@nestjs/common';
-import { CurrentUser } from 'src/shared-module/decorators/current-user.decorator';
-import { Plan } from 'src/shared-module/entities/plan.entity';
-import { User } from 'src/shared-module/entities/user.entity';
-import { isProduction } from 'src/shared-module/utils/helpers.util';
+import { CurrentUser } from '../../shared-module/decorators/current-user.decorator';
+import { Plan } from '../../shared-module/entities/plan.entity';
+import { User } from '../../shared-module/entities/user.entity';
+import { isProduction } from '../../shared-module/utils/helpers.util';
 import { RenewSubscriptionDto, CreatePlanDto } from './dto/subscription.dto';
-import { Subscription } from 'src/shared-module/entities/subscription.entity';
+import { Subscription } from '../../shared-module/entities/subscription.entity';
 import { SubscriptionService } from './subscription.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
